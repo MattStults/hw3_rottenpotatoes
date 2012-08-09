@@ -35,3 +35,7 @@ Then /I should see the following ratings should be (un)?checked: (.*)/ do |unche
     step("the \"ratings[#{rating}]\" checkbox should #{((uncheck==nil)?"":"not ")}be checked")
   end
 end
+
+Then /I should see all of the movies/ do
+  assert page.has_css?("table#movies tr", :count => (Movie.all.count+1))
+end
