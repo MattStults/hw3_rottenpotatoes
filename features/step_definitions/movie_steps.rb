@@ -39,3 +39,7 @@ end
 Then /I should see all of the movies/ do
   assert page.has_css?("table#movies tr", :count => (Movie.all.count+1))
 end
+
+Then /I should see no movies/ do
+  assert page.has_css?("table#movies tr", :count => 1)
+end
