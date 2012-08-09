@@ -4,7 +4,7 @@ Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
-    puts Movie.create!(movie)
+    Movie.create!(movie)
   end
 end
 
@@ -25,4 +25,13 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  for rating in rating_list.split(" ") do
+    step("#{((uncheck==nil)?"":"un")}check \"ratings[#{rating}]\"")
+  end
+end
+
+Then /I should see the following ratings should be (un)?checked: (.*)/ do |uncheck, rating_list|
+  for rating in rating_list.split(" ") do
+    step("the \"ratings[#{rating}]\" checkbox should #{((uncheck==nil)?"":"not ")}be checked")
+  end
 end
