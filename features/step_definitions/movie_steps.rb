@@ -30,12 +30,19 @@ end
 
 Then /I should see the following ratings should be (un)?checked: (.*)/ do |uncheck, rating_list|
   for rating in rating_list.split(" ") do
+    assert ((/<td>#{rating}<\/td>/ =~ page.body) != nil) ^ uncheck
     step("the \"ratings[#{rating}]\" checkbox should #{((uncheck==nil)?"":"not ")}be checked")
   end
 end
 
+Then /I should see the following movies: (.*)/ do |movie_list|
+  for movie in movie_list.split(" ") do
+    assert (/#{movie}/ =~ page.body) != nil
+  end
+end
+
 Then /I should see all of the movies/ do
-  assert page.has_css?("table#movies tr", :count => (Movie.all.count+1))
+  assert page.has_css?("table#movies tr", :count => 1 + Movie.all.count)
 end
 
 Then /I should see no movies/ do
