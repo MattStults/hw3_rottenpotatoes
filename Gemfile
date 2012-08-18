@@ -14,6 +14,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
+  gem 'rspec-rails'
 end
 group :production do
 #  gem 'pg'
@@ -38,3 +39,12 @@ gem 'jquery-rails'
 
 # To use debugger
 gem 'haml'
+
+group :test, :development do
+  gem 'simplecov', :require => false
+  gem 'cucumber-rails'
+  gem 'cucumber-rails-training-wheels' # some pre-fabbed step definitions  
+  gem 'database_cleaner' # to clear Cucumber's test database between runs
+  gem 'capybara'         # lets Cucumber pretend to be a web browser
+  gem 'launchy'          # a useful debugging aid for user stories
+end

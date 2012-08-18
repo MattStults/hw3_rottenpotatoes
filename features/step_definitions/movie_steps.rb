@@ -48,3 +48,7 @@ end
 Then /I should see no movies/ do
   assert page.has_css?("table#movies tr", :count => 1)
 end
+
+Then /the director of "(.*)" should be "(.*)"/ do |movie, director|
+  assert ((/Director:\s+#{director}/m =~ page.body) != nil)
+end
